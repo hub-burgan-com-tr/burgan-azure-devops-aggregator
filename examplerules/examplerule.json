@@ -1,0 +1,27 @@
+[
+  {
+    "RuleName": "ITAssignmentBlock",
+    "Expression": "body.Fields.ResponsibleGroup == \"IT\" && body.Fields.System_State == \"Request Pool\" && body.Fields.System_AssignedTo == \"John Doe\"",
+    "AppliesTo": "Development Request",
+    "RuleSet": "Request Management",
+    "IsActive": true,
+    "Priority": -500,
+    "Actions": [
+      {
+        "ActionName": "SetField",
+        "ConditionType": "Success",
+        "ExecutionOrder": 1,
+        "Parameters": [
+          {
+            "ParamKey": "FieldName",
+            "ParamValue": "System.AssignedTo"
+          },
+          {
+            "ParamKey": "FieldValue",
+            "ParamValue": ""
+          }
+        ]
+      }
+    ]
+  }
+]
