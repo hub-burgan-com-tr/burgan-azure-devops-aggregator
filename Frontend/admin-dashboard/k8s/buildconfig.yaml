@@ -1,0 +1,49 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: rules-dashboard-build
+  namespace: burganazuredevopsaggregator
+  labels:
+    app: rules-dashboard
+    component: frontend
+    tier: presentation
+    project: burgan-azure-devops
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: rules-dashboard:latest
+  source:
+    type: Git
+    git:
+      uri: "https://your-git-repo-url.git"
+      ref: "main"
+    contextDir: "Frontend/admin-dashboard"
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  triggers:
+  - type: GitLab
+    gitlab:
+      secret: webhook-secret
+  - type: Generic
+    generic:
+      secret: webhook-secret
+  - type: ConfigChange
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: rules-dashboard
+  namespace: burganazuredevopsaggregator
+  labels:
+    app: rules-dashboard
+    component: frontend
+    tier: presentation
+    project: burgan-azure-devops
+  annotations:
+    description: "Container images for Burgan Rules Management Dashboard"
+spec:
+  lookupPolicy:
+    local: false 

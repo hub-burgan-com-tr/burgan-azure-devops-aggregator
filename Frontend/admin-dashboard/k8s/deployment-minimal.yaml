@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rules-dashboard
+  namespace: burganazuredevopsaggregator
+  labels:
+    app: rules-dashboard
+    component: frontend
+    tier: presentation
+    project: burgan-azure-devops
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rules-dashboard
+  template:
+    metadata:
+      labels:
+        app: rules-dashboard
+        component: frontend
+        tier: presentation
+        project: burgan-azure-devops
+    spec:
+      # serviceAccountName: burganazuredevopsaggregatoruser  # REMOVED FOR MINIMAL SETUP
+      # dnsConfig:  # REMOVED - might cause DNS issues
+      #   searches:
+      #     - ebt.bank
+      containers:
+      - name: rules-dashboard
+        image: rules-dashboard:latest
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: API_BASE_URL
+          value: "https://azuredevops-aggregator.com.tr/api"
+        - name: TZ
+          value: Europe/Istanbul
+        - name: APP_NAME
+          value: "Rules Dashboard"
+        - name: ENVIRONMENT
+          value: "value"
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5 
