@@ -259,7 +259,7 @@ Gerekli **GitHub Secrets** (örnek):
 
 ---
 
-## Güvenlik & Sırlar
+## Güvenlik & Secrets
 - **Asla** gerçek `appsettings.json` commit’lemeyin.  
 - **Env var** / `dotnet user-secrets` / **GitHub Secrets** kullanın.  
 - Loglarda iş/kişi verisini maskeleyin.  
