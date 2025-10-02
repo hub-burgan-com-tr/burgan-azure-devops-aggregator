@@ -18,8 +18,7 @@ Azure DevOps Work Item olaylarını (durum değişimi, yorum vb.) kurallara gör
 - [Loglama & Kibana](#loglama--kibana)
 - [Geliştirme Notları](#geliştirme-notları)
 - [CI / GitHub Actions](#ci--github-actions)
-- [Güvenlik & Sırlar](#güvenlik--sırlar)
-- [Yol Haritası](#yol-haritası)
+- [Güvenlik & Secrets](#güvenlik--secrets)
 - [Lisans](#lisans)
 
 ---
